@@ -1,0 +1,25 @@
+{
+  "name": "skript_obfuscator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "build/index.js",
+  "dependencies": {
+    "skript-reader": "^1.0.11"
+  },
+  "devDependencies": {
+    "typescript": "^4.5.4"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fireclaws9/Skript_Obfuscator.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fireclaws9/Skript_Obfuscator/issues"
+  },
+  "homepage": "https://github.com/fireclaws9/Skript_Obfuscator#readme"
+}
