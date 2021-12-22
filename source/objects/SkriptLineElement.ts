@@ -24,6 +24,10 @@ export class SkriptLineElement {
                     }
                     break;
 
+                case "function_variable":
+                    this.processed.variables.push("_" + element.object_content);
+                    break;
+
                 default:
                     // ignore
             }

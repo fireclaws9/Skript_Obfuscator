@@ -49,6 +49,15 @@ export class SkriptSet {
                         }
                         break;
 
+                    case "function_variable":
+                        const function_variable_replacement = this.scripts_processed.variables_namespace["_" + loop_element.object_content];
+                        if (function_variable_replacement !== undefined) {
+                            obfuscated_line += function_variable_replacement.slice(1);
+                        } else {
+                            obfuscated_line += loop_element.object_content;
+                        }
+                        break;
+
                     default:
                         obfuscated_line += loop_element.object_content;
                         break;
