@@ -13,7 +13,6 @@ export function generate_variable_namespace(used_variables: string[], length: nu
         }
         generated_variables[variable_full] = variable_obfuscated;
         used_namespaces.push(variable_obfuscated);
-        console.log("GENERATED " + variable_obfuscated + " FOR " + variable_full);
     }
     return generated_variables;
 }

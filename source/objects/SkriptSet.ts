@@ -36,7 +36,7 @@ export class SkriptSet {
         // generate obfuscated lines
         for (let line_index = 0; line_index < this.scripts_elements.length; line_index++) {
             const elements = this.scripts_elements[line_index].get_elements();
-            let obfuscated_line = "";
+            let obfuscated_line = "", element_output = 0;
             for (let element_index = 0; element_index < elements.length; element_index++) {
                 const loop_element = elements[element_index];
                 switch (loop_element.object_type) {
@@ -62,6 +62,13 @@ export class SkriptSet {
                         obfuscated_line += loop_element.object_content;
                         break;
                 }
+                if (loop_element.object_type !== "indention" && loop_element.object_type !== "comment") {
+                    element_output++;
+                }
+            }
+            if (element_output <= 0) {
+                // empty line without indention and comments
+                continue;
             }
             this.scripts_obfuscated.push(obfuscated_line);
         }
