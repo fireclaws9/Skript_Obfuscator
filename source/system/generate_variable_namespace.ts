@@ -5,7 +5,7 @@ export function generate_variable_namespace(used_variables: string[], length: nu
         if (generated_variables[variable_full] !== undefined) {
             continue;
         }
-        const variable_full_matcher = variable_full.match(/^([^a-zA-Z]*)(\w+)/);
+        const variable_full_matcher = variable_full.match(/^([^a-zA-Z\d]*)([\w\d]+)/);
         const variable_header = variable_full_matcher ? variable_full_matcher[1] : "";
         let variable_obfuscated = null;
         while (variable_obfuscated === null || used_namespaces.includes(variable_obfuscated)) {

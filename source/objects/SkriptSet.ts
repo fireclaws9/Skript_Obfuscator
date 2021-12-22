@@ -41,7 +41,7 @@ export class SkriptSet {
                 const loop_element = elements[element_index];
                 switch (loop_element.object_type) {
                     case "variable":
-                        const variable_name_matcher = loop_element.object_content.match(/^{([^a-zA-Z]*\w+)(.*)/);
+                        const variable_name_matcher = loop_element.object_content.match(/^{([^a-zA-Z\d]*[\w\d]+)(.*)/);
                         if (variable_name_matcher && this.scripts_processed.variables_namespace[variable_name_matcher[1]] !== undefined) {
                             obfuscated_line += "{" + this.scripts_processed.variables_namespace[variable_name_matcher[1]] + variable_name_matcher[2];
                         } else {
