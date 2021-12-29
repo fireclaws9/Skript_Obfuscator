@@ -24,7 +24,7 @@ export class SkriptLineElement {
                     }
                     break;
 
-                case "function_variable":
+                case "function_parameter_name":
                     this.processed.variables.push("_" + element.object_content);
                     break;
 

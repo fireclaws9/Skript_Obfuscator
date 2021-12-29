@@ -41,20 +41,32 @@ export class SkriptSet {
                 const loop_element = elements[element_index];
                 switch (loop_element.object_type) {
                     case "variable":
-                        const variable_name_matcher = loop_element.object_content.match(/^{([^a-zA-Z\d]*[\w\d]+)(.*)/);
-                        if (variable_name_matcher && this.scripts_processed.variables_namespace[variable_name_matcher[1]] !== undefined) {
-                            obfuscated_line += "{" + this.scripts_processed.variables_namespace[variable_name_matcher[1]] + variable_name_matcher[2];
+                        const variable_name_matcher = loop_element.object_content.match(/^{([^a-zA-Z\d]*)([\w\d]+)(.*)/);
+                        const variable_name_full = variable_name_matcher ? variable_name_matcher[1] + variable_name_matcher[2] : "";
+                        if (variable_name_matcher && variable_name_matcher[1] === "_" && this.scripts_processed.variables_namespace[variable_name_full] !== undefined) {
+                            // currenty only obfuscating local variables (variable_name_matcher[1] === "_")
+                            obfuscated_line += "{" + this.scripts_processed.variables_namespace[variable_name_full] + variable_name_matcher[3];
                         } else {
                             obfuscated_line += loop_element.object_content;
                         }
                         break;
 
-                    case "function_variable":
-                        const function_variable_replacement = this.scripts_processed.variables_namespace["_" + loop_element.object_content];
-                        if (function_variable_replacement !== undefined) {
-                            obfuscated_line += function_variable_replacement.slice(1);
+                    case "function_parameter_name":
+                        const function_parameter_name_replacement = this.scripts_processed.variables_namespace["_" + loop_element.object_content];
+                        if (function_parameter_name_replacement !== undefined) {
+                            obfuscated_line += function_parameter_name_replacement.slice(1);
                         } else {
                             obfuscated_line += loop_element.object_content;
+                        }
+                        break;
+
+                    case "function_parameter_type":
+                        const function_parameter_type_matcher = loop_element.object_content.match(/^.*s$/);
+                        if (function_parameter_type_matcher !== null) {
+                            // type end with "s", must be an array (list)
+                            obfuscated_line += "objects";
+                        } else {
+                            obfuscated_line += "object"
                         }
                         break;
 
